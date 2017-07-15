@@ -10,8 +10,8 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel">
               <div class="panel-heading">
-                <a href="/jobs/{{$job->id}}" class="text-capitalize">
-                #{{$job->id}} - <b>{{$job->job_position}}</b> | {{$job->job_location}}
+                <a href="/jobs/{{$job->job_id}}" class="text-capitalize">
+                #{{$job->job_id}} - <b>{{$job->job_position}}</b> | {{$job->job_location}}
                 </a>
               </div>
             </div>

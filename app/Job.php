@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Job extends Model
 {
 
+  protected $primaryKey = 'job_id';  //find fonksiyonu icin
+
   public function comment()
   {
     return $this->hasMany('App\Comment');

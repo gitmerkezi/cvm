@@ -24,14 +24,14 @@ class CreateCommentsTable extends Migration
  	});
 
   Schema::table('comments', function (Blueprint $table){
-    $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
+    $table->foreign('job_id')->references('job_id')->on('jobs')->onDelete('cascade');
   });
  }
 
  public function down()
  {
      Schema::table('comments', function (Blueprint $table) {
-         $table->dropForeign('comments_job_id_foreign');
+         $table->dropForeign('comments_job_id_foreign'); //emin degilim
      });
      Schema::dropIfExists('comments');
  }

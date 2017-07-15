@@ -3,7 +3,7 @@
 
 <h2>Edit Announcement</h2>
 
-<form action="{{url('/admin/jobs/'.$job->id)}}" method="post">
+<form action="{{url('/admin/jobs/'.$job->job_id)}}" method="post">
   {{ csrf_field() }}
   {{ method_field('put') }}
   <div class="form-group col-md-6">

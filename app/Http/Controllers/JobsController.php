@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 
+
 class JobsController extends Controller
 {
     /**
@@ -16,6 +17,7 @@ class JobsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
 
 
      public function __construct()
@@ -74,9 +76,15 @@ class JobsController extends Controller
     {
         //return view('admin.pages.jobs', ['jobs' => Job::findOrFail($id)]);
 
-        $data['comments'] = \App\Comment::join('jobs', 'id', '=', 'comments.job_id')
-        ->where([ ['approved', '1'] ,['job_id',$id ]])
-        ->paginate(2);
+        //$data['comments'] = \App\Comment::join('jobs', 'job_id', '=', 'comments.job_id')
+        //->where([ ['approved', '1'] ,['job_id',$id]])
+        //->paginate(2);
+
+        $data['comments'] = \App\Comment::where('job_id', '=', $id)->paginate(2);
+
+
+
+
 
         $data['job'] = \App\Job::findOrFail($id);
         return view('jobs.single', $data)->with('id', '$job');

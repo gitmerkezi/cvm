@@ -17,14 +17,16 @@ class CommentsController extends Controller
 
      public function __construct()
      {
-         $this->middleware('auth');
+         $this->middleware('auth', ['except' => ['store', 'anotherMethod']]);
      }
 
     public function index()
     {
-      $data['comments'] = \App\Comment::join('jobs', 'id', '=', 'comments.job_id')->paginate(5);
-      return view ('admin.pages.comments.index', $data);
+      $data['comments'] = \App\Comment::leftJoin('jobs', 'jobs.job_id', '=', 'comments.job_id')
+      ->orderBy('comments.created_at', 'desc')
+      ->paginate(5);
 
+      return view ('admin.pages.comments.index', $data);
     }
 
     /**
@@ -58,7 +60,7 @@ class CommentsController extends Controller
           'sender_name' => $request['name'],
           'sender_email' => $request['email'],
           'comment' => $request['comment'],
-          'approved' => '1', //onaya ihtiyac duymadan yayınla
+          'approved' => '0', //onaya ihtiyac duymadan yayınla icin 1
           'job_id' => $id,
           'ip_address' => $request->ip(),
 

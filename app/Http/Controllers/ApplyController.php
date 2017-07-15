@@ -23,7 +23,16 @@ class ApplyController extends Controller
 
     public function index()
     {
-      $data['applies'] = \App\Apply::orderBy('created_at', 'desc')->paginate(5);
+//leftJoin('jobs', 'jobs.job_id', '=', 'applies.job_id')
+
+      $data['applies'] = \App\Apply::leftJoin('jobs', 'jobs.job_id', '=', 'applies.job_id')
+      ->join('users', function ($join) {
+          $join->on('users.id', '=', 'applies.user_id')
+               ->select('users.name', 'users.email', 'users.id');
+      })
+      ->orderBy('applies.created_at', 'desc')
+      ->paginate(6);
+
       return view ('admin.pages.apply.index',$data);
     }
 

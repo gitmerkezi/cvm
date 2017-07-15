@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">#{{$job->id}} - <b>{{$job->job_position}}</b> | {{$job->job_location}} <a href="/jobs/{{$job->id}}/create" class="btn btn-success btn-xs ">Apply</a></div>
+                <div class="panel-heading">#{{$job->job_id}} - <b>{{$job->job_position}}</b> | {{$job->job_location}} <a href="/jobs/{{$job->job_id}}/create" class="btn btn-success btn-xs ">Apply</a></div>
                 <div class="panel-body">
                 {!! nl2br(e($job->job_details)) !!}
                 </div>
@@ -44,7 +44,7 @@
       <div class="col-md-6 col-md-offset-4">
         <hr>
         <h4>Add Comment</h4>
-            <form action="{{url('/jobs/'.$job->id.'/new')}}" method="post">
+            <form action="{{url('/jobs/'.$job->job_id.'/new')}}" method="post">
               {{ csrf_field() }}
 
               @if (Auth::check())

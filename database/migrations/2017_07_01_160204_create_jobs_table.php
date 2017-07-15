@@ -13,7 +13,7 @@ class CreateJobsTable extends Migration
      */
      public function up(){
  	Schema::create('jobs', function($table){
-      $table->unsignedInteger('id', true);
+      $table->unsignedInteger('job_id', true);
       $table->integer('user_id')->unsigned();
       $table->string('job_position', 255); //varchar(255)
       $table->string('job_location', 255);
