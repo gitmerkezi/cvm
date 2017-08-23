@@ -16,14 +16,24 @@
         <!-- Styles -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <style>
-            html, body, title.a {
+            html, body {
                 background-color: #fff;
-                color: #636b6f;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
             }
+
+            title.a{
+              color: #636b6f;
+            }
+
+            .content{
+
+              display: block;
+              width:100%;
+            }
+
 
             .full-height {
                 height: 60vh;
@@ -45,7 +55,12 @@
             }
 
             .content {
-                text-align: center;
+                /*text-align: center;*/
+                height:100%;
+            }
+
+            .height{
+              height:100%;
             }
 
             .title {
@@ -119,6 +134,10 @@
         </style>
     </head>
     <body>
+            <div class="content">
+
+              <div class="height">
+
 
             <div class="col-md-2 col-sm-4 sidebar1" id="sticker">
                 <div class="logo">
@@ -144,7 +163,7 @@
                       </ul>
                 </div>
             </div>
-        <div class="col-md-10 flex-center position-ref">
+        <div class="col-md-10 position-ref">
 
                 <div class="top-right links">{{date('d-m-Y')}} | <strong>Laravel:</strong> {{ App::VERSION() }}
                         <a href="{{ url('/admin') }}">Hello, {{ Auth::user()->name }}</a>
@@ -172,8 +191,10 @@
                 @endif
 
                 <div> @yield('content') </div>
-                <div class="m-b-md"> <hr>(C) 2017 </div><br>
+                <div class="m-b-md col-lg-12"> <hr>(C) 2017 </div><br>
             </div>
+        </div>
+</div>
         </div>
 
     </body>

@@ -17,9 +17,9 @@ class CreateCommentsTable extends Migration
  		$table->integer('job_id')->unsigned();
  		$table->string('sender_name',255);
  		$table->string('sender_email',255);
-    $table->text('comment');
-    $table->boolean('approved');
-    $table->string('ip_address',15);
+        $table->text('comment');
+        $table->boolean('approved');
+        $table->string('ip_address',15);
  		$table->timestamps();
  	});
 

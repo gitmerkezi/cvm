@@ -16,7 +16,7 @@
   @foreach($users as $user)
   <tr>
     <td>{{$user->id}}</td>
-    <td>{{$user->name}}</td>
+    <td>{{$user->name}} {{$user->lname}}</td>
     <td>{{$user->email}}</td>
     <td>
       <a href="/admin/users/{{$user->id}}/edit" class="btn btn-warning btn-xs">Edit</a> | <form action="{{ url('/admin/users/'.$user->id) }}" method="POST" class="hiddenblank">

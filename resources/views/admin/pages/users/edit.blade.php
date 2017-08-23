@@ -7,17 +7,25 @@
   {{ csrf_field() }}
   {{ method_field('put') }}
   <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" class="form-control" name="name" value="{{$user->name}}">
+    {!! Form::label('Name') !!}
+    {{ Form::text('first_name', $user->name,
+      array('type'=>'text',
+            'name'=>'name',
+            'class'=>'form-control')) }}
   </div>
   <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" name="email" value="{{$user->email}}">
+    {!! Form::label('Email address') !!}
+    {!! Form::email('email', $user->email,
+        array('type'=>'email',
+              'class'=>'form-control')) !!}
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" name="password" placeholder="Password">
+    {!! Form::label('Password') !!}
+    {!! Form::password('password',
+        array('type'=>'password',
+              'class'=>'form-control',
+              'placeholder'=>'Password')) !!}
   </div>
-  <button type="submit" class="btn btn-primary">Update</button>
+  {!! Form::submit('Update',array('class'=>'btn btn-primary'))!!}
 </form>
 @stop

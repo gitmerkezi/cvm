@@ -22,7 +22,7 @@ class CommentsController extends Controller
 
     public function index()
     {
-      $data['comments'] = \App\Comment::leftJoin('jobs', 'jobs.job_id', '=', 'comments.job_id')
+      $data['comments'] = Comment::leftJoin('jobs', 'jobs.job_id', '=', 'comments.job_id')
       ->orderBy('comments.created_at', 'desc')
       ->paginate(5);
 
@@ -39,24 +39,23 @@ class CommentsController extends Controller
         //
     }
 
+    public function answer()
+    {
+
+      return view ('admin.pages.apply.answer');
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(CommentRequest $request, $id)
     {
-      $this->validate(request(),[
-        'name' => 'required',
-        'email' => 'required|string|email|max:255',
-        'comment' => 'required|min:5|max:2000',
-      ]);
 
-
-
-
-      \App\Comment::create([
+      Comment::create([
           'sender_name' => $request['name'],
           'sender_email' => $request['email'],
           'comment' => $request['comment'],
@@ -89,7 +88,7 @@ class CommentsController extends Controller
      */
     public function edit($id)
     {
-        $data['comment'] = \App\Comment::find($id);
+        $data['comment'] = Comment::find($id);
         return view ('admin.pages.comments.edit', $data);
     }
 
@@ -113,7 +112,7 @@ class CommentsController extends Controller
      */
     public function destroy($comment_id)
     {
-      $comment = \App\Comment::findOrFail($comment->comment_id);
+      $comment = Comment::findOrFail($comment->comment_id);
       $comment->delete();
 
       return redirect(url('admin/comments'));

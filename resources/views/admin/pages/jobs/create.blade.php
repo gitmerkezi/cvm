@@ -5,23 +5,34 @@
 
 @include ('admin.layouts.errors')
 
-<form action="{{url('/admin/jobs')}}" method="post">
+<form action="{{url('/admin/jobs')}}" method="post" class="col-lg-11">
   {{ csrf_field() }}
   <div class="form-group col-md-6">
-    <label for="name">Position</label>
-    <input type="text" class="form-control" name="job_position" placeholder="Position">
+    {{ Form::label('Position') }}
+    {{ Form::text('job_position', null,
+      array('type'=>'text',
+            'class'=>'form-control',
+            'placeholder'=>'Position')) }}
   </div>
   <div class="form-group col-md-6">
-    <label for="">Location</label>
-    <input type="text" class="form-control" name="job_location" placeholder="Location">
+    {{ Form::label('Location') }}
+    {{ Form::text('job_location', null,
+      array('type'=>'text',
+            'class'=>'form-control',
+            'placeholder'=>'Location')) }}
   </div>
   <div class="form-group col-md-12">
-    <label for="">Details</label>
-    <textarea type="text" rows="9" name="job_details" class="form-control" rows="5"></textarea>
+    {{ Form::label('Details') }}
+    {{ Form::textarea('job_details', null,
+        array('type'=>'text',
+              'class'=>'form-control',
+              'rows'=>'9',
+              'cols'=>'10')) }}
   </div>
-  <div class="btn-group">
+  <div class="btn-group col-lg-11">
     <button type="submit" name="published" class="btn btn-primary" value="0">Save Draft</button>
     <button type="submit" name="published" class="btn btn-warning" value="1">Create</button>
   </div>
 </form>
+
 @stop

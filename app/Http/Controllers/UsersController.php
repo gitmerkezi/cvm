@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Job;
+use \App\User;
 use Hash;
 use DB;
+use \App\Http\Requests\UserRequest;
+
 
 class UsersController extends Controller
 {
@@ -21,14 +25,15 @@ class UsersController extends Controller
 
      public function dashboard()
      {
-
-       return view ('admin.pages.users.dashboard');
+         $announce = Job::count();
+         $tusers = User::count();
+       return view ('admin.pages.dashboard',compact('announce', 'tusers'));
 
      }
 
     public function index()
     {
-        $data['users'] = \App\User::paginate(5);
+        $data['users'] = User::paginate(5);
         return view ('admin.pages.users.index', $data);
 
     }
@@ -51,16 +56,10 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
 
-      $this->validate(request(),[
-        'name' => 'required',
-        'email' => 'required|string|email|max:255|unique:users',
-        'password' => 'required',
-      ]);
-
-      \App\User::create([
+      User::create([
           'name' => $request['name'],
           'email' => $request['email'],
           'password' => bcrypt($request['password']),
@@ -88,7 +87,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-      $data['user'] = \App\User::find($id);
+      $data['user'] = User::find($id);
 
       // admine öncelik
       if ($id==1) {
@@ -107,7 +106,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $user = \App\User::find($id);
+      $user = User::find($id);
       $user->email = $request->get('email');
       $user->name = $request->get('name');
 
@@ -127,7 +126,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-      $user = \App\User::findOrFail($id);
+      $user = User::findOrFail($id);
 
       // admine öncelik
       if ($id==1) {

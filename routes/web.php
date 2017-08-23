@@ -18,6 +18,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('jobs', 'JobsController');
     Route::resource('comments', 'CommentsController');
     Route::get('applications', 'ApplyController@index');
+    Route::get('answer', 'CommentsController@answer');
 });
 
 /*
@@ -30,7 +31,7 @@ Route::get('/', function () {
     return redirect('jobs');
 });
 
-Route::get('/jobs/{id}', 'JobsController@show');
+Route::post('/jobs/{id}', 'JobsController@show');
 Route::post('/jobs/{id}/new', 'CommentsController@store');
 
 Route::get('/jobs', 'JobsController@usershow');

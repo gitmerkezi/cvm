@@ -37,10 +37,6 @@
 
 
 
-
-
-
-
       <div class="col-md-6 col-md-offset-4">
         <hr>
         <h4>Add Comment</h4>
@@ -56,19 +52,18 @@
                   <input type="hidden" name="email" value="{{ Auth::user()->email }}">
               @else
                   <div class="form-group">
-                    <label for="name">Name</label>
+                    {{ Form::label('Name') }}
                     <input type="text" class="form-control" name="name" placeholder="Name">
                   </div>
                   <div class="form-group">
-                    <label for="mail">e-Mail</label>
+                    {{ Form::label('e-Mail') }}
                     <input type="text" class="form-control" name="email" placeholder="e-Mail">
                   </div>
                   <div class="form-group">
-                    <label for="">Comment</label>
+                    {{ Form::label('Comment') }}
                     <textarea type="text" row="5" name="comment" class="form-control" rows="4"></textarea>
                   </div>
               @endif
-
 
               <button type="submit" class="btn btn-primary">Send</button>
             </form>

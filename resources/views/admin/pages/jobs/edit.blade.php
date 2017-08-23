@@ -7,15 +7,15 @@
   {{ csrf_field() }}
   {{ method_field('put') }}
   <div class="form-group col-md-6">
-    <label for="">Position</label>
+    {{ Form::label('Position') }}
     <input type="text" class="form-control" name="job_position" value="{{$job->job_position}}">
   </div>
   <div class="form-group col-md-6">
-    <label for="">Location</label>
+    {{ Form::label('Location') }}
     <input type="text" class="form-control" name="job_location" value="{{$job->job_location}}">
   </div>
   <div class="form-group col-md-12">
-    <label for="">Details</label>
+    {{ Form::label('Details') }}
     <textarea type="text" rows="9" class="form-control" name="job_details">{{$job->job_details}}</textarea>
   </div>
 

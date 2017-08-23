@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use \App\Job;
+use \App\Comment;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -27,7 +29,7 @@ class JobsController extends Controller
 
     public function index()
     {
-        $data['jobs'] = \App\Job::orderBy('created_at', 'desc')->paginate(5);
+        $data['jobs'] = Job::orderBy('created_at', 'desc')->paginate(5);
       	return view('admin.pages.jobs.index',$data);
 
     }
@@ -50,18 +52,14 @@ class JobsController extends Controller
      */
     public function store(Request $request)
     {
-
-
-
       $uid= Auth::user()->id;
 
-      \App\Job::create([
+      Job::create([
           'job_position' => $request['job_position'],
           'job_location' => $request['job_location'],
           'job_details' => $request['job_details'],
           'published' => $request['published'],
-          'user_id' => $uid,
-
+          'user_id' => $uid
       ]);
         return redirect(url('admin/jobs'));
     }
@@ -76,17 +74,13 @@ class JobsController extends Controller
     {
         //return view('admin.pages.jobs', ['jobs' => Job::findOrFail($id)]);
 
-        //$data['comments'] = \App\Comment::join('jobs', 'job_id', '=', 'comments.job_id')
+        //$data['comments'] = Comment::join('jobs', 'job_id', '=', 'comments.job_id')
         //->where([ ['approved', '1'] ,['job_id',$id]])
         //->paginate(2);
 
-        $data['comments'] = \App\Comment::where('job_id', '=', $id)->paginate(2);
+        $data['comments'] = Comment::where('job_id', '=', $id)->paginate(2);
 
-
-
-
-
-        $data['job'] = \App\Job::findOrFail($id);
+        $data['job'] = Job::findOrFail($id);
         return view('jobs.single', $data)->with('id', '$job');
     }
 
@@ -95,7 +89,11 @@ class JobsController extends Controller
         //return view('admin.pages.jobs', ['jobs' => Job::findOrFail($id)]);
 
         //$data['jobs'] = DB::table('jobs')->where('published', '1')->orderBy('created_at', 'desc')->paginate(6);
-        $data['jobs'] = \App\Job::where('published', '1')->orderBy('created_at', 'desc')->paginate(6);
+        
+        $data['jobs'] = Job::where('published', '1')
+        ->orderBy('created_at', 'desc')
+        ->paginate(6);
+
         return view('jobs.index',$data);
     }
 
@@ -108,7 +106,7 @@ class JobsController extends Controller
      */
     public function edit($id)
     {
-      $data['job'] = \App\Job::find($id);
+      $data['job'] = Job::find($id);
       return view ('admin.pages.jobs.edit', $data);
     }
 
@@ -124,7 +122,7 @@ class JobsController extends Controller
 
       $uid= Auth::user()->id;
 
-      $job = \App\Job::find($id);
+      $job = Job::find($id);
       $job->job_position = $request->get('job_position');
       $job->job_location = $request->get('job_location');
       $job->job_details = $request->get('job_details');
@@ -144,7 +142,7 @@ class JobsController extends Controller
     public function destroy($id)
     {
 
-      $job = \App\Job::findOrFail($id);
+      $job = Job::findOrFail($id);
       $job->delete();
 
       return redirect(url('admin/jobs'));
